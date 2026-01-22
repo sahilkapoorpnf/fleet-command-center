@@ -12,6 +12,9 @@ import { DriversPage } from "./pages/admin/DriversPage";
 import { LoadsPage } from "./pages/admin/LoadsPage";
 import { UsersPage } from "./pages/admin/UsersPage";
 import { PlaceholderPage } from "./pages/admin/PlaceholderPage";
+import { DriverApp } from "./pages/mobile/DriverApp";
+import { DispatcherApp } from "./pages/mobile/DispatcherApp";
+import { ManagerApp } from "./pages/mobile/ManagerApp";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +26,11 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          
+          {/* Mobile App Routes */}
+          <Route path="/driver/*" element={<DriverApp />} />
+          <Route path="/dispatcher/*" element={<DispatcherApp />} />
+          <Route path="/manager/*" element={<ManagerApp />} />
           
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminLayout />}>
