@@ -15,6 +15,7 @@ import { PlaceholderPage } from "./pages/admin/PlaceholderPage";
 import { DriverApp } from "./pages/mobile/DriverApp";
 import { DispatcherApp } from "./pages/mobile/DispatcherApp";
 import { ManagerApp } from "./pages/mobile/ManagerApp";
+import { PresentationPage } from "./pages/PresentationPage";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/presentation" element={<PresentationPage />} />
           
           {/* Mobile App Routes */}
           <Route path="/driver/*" element={<DriverApp />} />
