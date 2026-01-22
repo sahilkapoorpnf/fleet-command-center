@@ -1,7 +1,7 @@
-import { useState } from "react";
 import { MobileHeader } from "@/components/mobile/MobileHeader";
 import { MobileBottomNav } from "@/components/mobile/MobileBottomNav";
 import { StatusCard } from "@/components/mobile/StatusCard";
+import { LiveTrackingMap } from "@/components/mobile/LiveTrackingMap";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,7 +16,6 @@ import {
   FileText,
   Settings,
   TrendingUp,
-  TrendingDown,
   Fuel,
   Wrench,
   AlertTriangle,
@@ -131,6 +130,9 @@ export const ManagerApp = () => {
             color="success"
           />
         </div>
+
+        {/* Live Tracking Map */}
+        <LiveTrackingMap compact />
 
         {/* Revenue Chart Placeholder */}
         <Card>
