@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TruckDispatch Pro - Presentation</title>
+  <style>
+    :root {
+      --background: #09090b;
+      --foreground: #fafafa;
+      --card: #0a0a0c;
+      --card-foreground: #fafafa;
+      --primary: #3b82f6;
+      --primary-foreground: #ffffff;
+      --secondary: #27272a;
+      --muted: #27272a;
+      --muted-foreground: #a1a1aa;
+      --accent: #27272a;
+      --border: #27272a;
+      --success: #22c55e;
+      --success-foreground: #ffffff;
+      --warning: #f59e0b;
+      --warning-foreground: #ffffff;
+      --destructive: #ef4444;
+      --sidebar: #0f172a;
+      --sidebar-foreground: #f8fafc;
+      --sidebar-accent: #1e293b;
+      --radius: 0.75rem;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--background);
+      color: var(--foreground);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: rgba(9, 9, 11, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--primary);
+    }
+    
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--primary), #60a5fa);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+    }
+    
+    .nav-tab {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: transparent;
+      border: none;
+      color: var(--muted-foreground);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .nav-tab:hover {
+      background: var(--muted);
+      color: var(--foreground);
+    }
+    
+    .nav-tab.active {
+      background: var(--primary);
+      color: var(--primary-foreground);
+    }
+    
+    .slide-counter {
+      font-size: 14px;
+      color: var(--muted-foreground);
+    }
+    
+    /* Main Content */
+    .slides-container {
+      padding-top: 64px;
+      min-height: 100vh;
+    }
+    
+    .slide {
+      display: none;
+      min-height: calc(100vh - 64px);
+      padding: 60px 40px 100px;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .slide.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .slide-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .slide-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: rgba(59, 130, 246, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+    
+    .slide-icon svg {
+      width: 32px;
+      height: 32px;
+      color: var(--primary);
+    }
+    
+    .slide-title {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    
+    .slide-subtitle {
+      font-size: 18px;
+      color: var(--muted-foreground);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+    }
+    
+    .stat-card .label {
+      font-size: 10px;
+      color: var(--muted-foreground);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    
+    .stat-card .value {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    /* Feature Cards */
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(59, 130, 246, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--primary);
+    }
+    
+    .feature-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .feature-desc {
+      font-size: 14px;
+      color: var(--muted-foreground);
+    }
+    
+    /* Phone Mockup */
+    .phone-mockup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .phone-title {
+      font-size: 14px;
+      color: var(--muted-foreground);
+    }
+    
+    .phone-frame {
+      width: 280px;
+      height: 560px;
+      background: #1a1a1c;
+      border-radius: 40px;
+      padding: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+    
+    .phone-notch {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 28px;
+      background: #1a1a1c;
+      border-radius: 0 0 16px 16px;
+      z-index: 10;
+    }
+    
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: var(--background);
+      border-radius: 32px;
+      overflow: hidden;
+    }
+    
+    /* Desktop Mockup */
+    .desktop-mockup {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .desktop-title {
+      font-size: 14px;
+      color: var(--muted-foreground);
+    }
+    
+    .desktop-frame {
+      background: var(--sidebar);
+      border-radius: 12px;
+      padding: 8px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+    
+    .desktop-topbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: var(--sidebar);
+      border-radius: 8px 8px 0 0;
+    }
+    
+    .desktop-dots {
+      display: flex;
+      gap: 6px;
+    }
+    
+    .desktop-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    
+    .desktop-dot.red { background: #ef4444; }
+    .desktop-dot.yellow { background: #f59e0b; }
+    .desktop-dot.green { background: #22c55e; }
+    
+    .desktop-url {
+      flex: 1;
+      margin: 0 16px;
+      background: var(--sidebar-accent);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 10px;
+      color: var(--muted-foreground);
+      text-align: center;
+    }
+    
+    .desktop-screen {
+      width: 800px;
+      height: 480px;
+      background: var(--background);
+      overflow-y: auto;
+    }
+    
+    .desktop-stand {
+      width: 96px;
+      height: 32px;
+      background: linear-gradient(180deg, var(--sidebar), var(--sidebar-accent));
+      margin: 0 auto;
+    }
+    
+    .desktop-base {
+      width: 160px;
+      height: 8px;
+      background: var(--sidebar);
+      border-radius: 0 0 8px 8px;
+      margin: 0 auto;
+    }
+    
+    /* Mobile Header (inside mockup) */
+    .mobile-header {
+      background: var(--sidebar);
+      color: var(--sidebar-foreground);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .mobile-header h3 {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    .mobile-header p {
+      font-size: 10px;
+      color: rgba(248, 250, 252, 0.6);
+    }
+    
+    /* Status Badge */
+    .badge {
+      display: inline-flex;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 10px;
+      font-weight: 500;
+    }
+    
+    .badge-primary { background: rgba(59, 130, 246, 0.1); color: var(--primary); }
+    .badge-success { background: rgba(34, 197, 94, 0.1); color: var(--success); }
+    .badge-warning { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+    .badge-destructive { background: rgba(239, 68, 68, 0.1); color: var(--destructive); }
+    
+    /* Button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: var(--primary-foreground);
+    }
+    
+    .btn-primary:hover {
+      background: #2563eb;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--foreground);
+    }
+    
+    .btn-outline:hover {
+      background: var(--muted);
+    }
+    
+    /* Navigation Controls */
+    .nav-controls {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(10, 10, 12, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      padding: 12px 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+    
+    .nav-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      color: var(--foreground);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    
+    .nav-btn:hover {
+      background: var(--muted);
+    }
+    
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    
+    .progress-dots {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .progress-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 9999px;
+      background: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .progress-dot:hover {
+      background: var(--muted-foreground);
+    }
+    
+    .progress-dot.active {
+      width: 24px;
+      background: var(--primary);
+    }
+    
+    .keyboard-hint {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      font-size: 12px;
+      color: var(--muted-foreground);
+    }
+    
+    /* Process Flow */
+    .process-flow {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    
+    .process-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(59, 130, 246, 0.1);
+      border: 2px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    
+    .process-number {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--primary-foreground);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .process-title {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    
+    .process-desc {
+      font-size: 12px;
+      color: var(--muted-foreground);
+    }
+    
+    /* Grids */
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    
+    .flex-center { display: flex; align-items: center; justify-content: center; }
+    .flex-between { display: flex; align-items: center; justify-content: space-between; }
+    .flex-col { display: flex; flex-direction: column; }
+    .gap-2 { gap: 8px; }
+    .gap-4 { gap: 16px; }
+    .gap-6 { gap: 24px; }
+    .gap-8 { gap: 32px; }
+    .mb-2 { margin-bottom: 8px; }
+    .mb-4 { margin-bottom: 16px; }
+    .mt-4 { margin-top: 16px; }
+    .p-4 { padding: 16px; }
+    .text-center { text-align: center; }
+    .text-sm { font-size: 14px; }
+    .text-xs { font-size: 12px; }
+    .font-bold { font-weight: 700; }
+    .font-semibold { font-weight: 600; }
+    
+    /* Map Styles */
+    .map-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      height: 320px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), var(--background), rgba(59, 130, 246, 0.1));
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    
+    .map-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    
+    .map-marker {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .map-marker:hover {
+      transform: scale(1.1);
+    }
+    
+    .map-marker.moving { background: var(--success); }
+    .map-marker.stopped { background: var(--warning); }
+    .map-marker.idle { background: var(--muted); }
+    
+    .map-legend {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      background: rgba(10, 10, 12, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    
+    .map-legend-title {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .map-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      margin-bottom: 4px;
+    }
+    
+    .map-legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    
+    .map-count {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(10, 10, 12, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      text-align: center;
+    }
+    
+    .map-count .value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .map-count .label {
+      font-size: 10px;
+      color: var(--muted-foreground);
+    }
+    
+    /* Progress Bar */
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--muted);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      border-radius: 9999px;
+      background: var(--primary);
+    }
+    
+    .progress-fill.success { background: var(--success); }
+    .progress-fill.warning { background: var(--warning); }
+    .progress-fill.destructive { background: var(--destructive); }
+    
+    /* Table styles */
+    .table-header {
+      display: grid;
+      gap: 8px;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--muted-foreground);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .table-row {
+      display: grid;
+      gap: 8px;
+      font-size: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .table-row:last-child {
+      border-bottom: none;
+    }
+    
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .process-flow {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .desktop-screen {
+        width: 600px;
+        height: 400px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-tabs {
+        display: none;
+      }
+      
+      .process-flow {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .desktop-mockup {
+        transform: scale(0.8);
+        transform-origin: top center;
+      }
+      
+      .keyboard-hint {
+        display: none;
+      }
+    }
+    
+    /* SVG Icons */
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .icon-sm {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .icon-lg {
+      width: 28px;
+      height: 28px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: white;">
+          <rect x="1" y="3" width="15" height="13" rx="2" ry="2"></rect>
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+          <circle cx="5.5" cy="18.5" r="2.5"></circle>
+          <circle cx="18.5" cy="18.5" r="2.5"></circle>
+        </svg>
+      </div>
+      TruckDispatch Pro
+    </div>
+    
+    <div class="nav-tabs" id="navTabs"></div>
+    
+    <div class="slide-counter">
+      <span id="currentSlide">1</span> / <span id="totalSlides">8</span>
+    </div>
+  </header>
+
+  <!-- Slides Container -->
+  <div class="slides-container" id="slidesContainer"></div>
+
+  <!-- Navigation Controls -->
+  <div class="nav-controls">
+    <button class="nav-btn" id="prevBtn" onclick="prevSlide()">
+      <svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    
+    <div class="progress-dots" id="progressDots"></div>
+    
+    <button class="nav-btn" id="nextBtn" onclick="nextSlide()">
+      <svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+  
+  <div class="keyboard-hint">Use ← → arrows or space to navigate</div>
+
+  <script>
+    // Slide definitions
+    const slides = [
+      { id: 'hero', label: 'Introduction', icon: 'home' },
+      { id: 'process', label: 'Process Flow', icon: 'workflow' },
+      { id: 'admin-dashboard', label: 'Admin Dashboard', icon: 'layout' },
+      { id: 'admin-management', label: 'Fleet Management', icon: 'settings' },
+      { id: 'driver-app', label: 'Driver App', icon: 'truck' },
+      { id: 'dispatcher-app', label: 'Dispatcher App', icon: 'radio' },
+      { id: 'manager-app', label: 'Manager App', icon: 'chart' },
+      { id: 'gps-tracking', label: 'GPS Tracking', icon: 'map' }
+    ];
+    
+    let currentSlide = 0;
+    
+    // Icons SVG
+    const icons = {
+      home: '<svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>',
+      workflow: '<svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="6" rx="1"></rect><rect x="15" y="3" width="6" height="6" rx="1"></rect><rect x="9" y="15" width="6" height="6" rx="1"></rect><path d="M6 9v3a1 1 0 0 0 1 1h4"></path><path d="M18 9v3a1 1 0 0 1-1 1h-4"></path></svg>',
+      layout: '<svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><line x1="3" x2="21" y1="9" y2="9"></line><line x1="9" x2="9" y1="21" y2="9"></line></svg>',
+      settings: '<svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>',
+      truck: '<svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2" ry="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>',
+      radio: '<svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"></circle><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path></svg>',
+      chart: '<svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" x2="18" y1="20" y2="10"></line><line x1="12" x2="12" y1="20" y2="4"></line><line x1="6" x2="6" y1="20" y2="14"></line></svg>',
+      map: '<svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>',
+      package: '<svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="16.5" x2="7.5" y1="9.4" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" x2="12" y1="22.08" y2="12"></line></svg>',
+      users: '<svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
+      dollar: '<svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" x2="12" y1="2" y2="22"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>',
+      trending: '<svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>',
+      clock: '<svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>',
+      check: '<svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>',
+      navigation: '<svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>',
+      camera: '<svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>',
+      phone: '<svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>',
+      alert: '<svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" x2="12" y1="9" y2="13"></line><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>',
+      clipboard: '<svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect></svg>',
+      search: '<svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>',
+      plus: '<svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>',
+      edit: '<svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>',
+      trash: '<svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>',
+      route: '<svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"></circle><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"></path><circle cx="18" cy="5" r="3"></circle></svg>',
+      fuel: '<svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 22h12v-4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"></path><path d="M3 16V4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v12"></path><path d="M13 8h4a2 2 0 0 1 2 2v10"></path><path d="M21 15h-4"></path></svg>',
+      wrench: '<svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>'
+    };
+    
+    // Generate slide content
+    function generateSlides() {
+      const container = document.getElementById('slidesContainer');
+      
+      // Slide 1: Hero
+      container.innerHTML += `
+        <div class="slide active" id="slide-hero">
+          <div class="slide-header">
+            <h1 class="slide-title" style="font-size: 48px;">TruckDispatch Pro</h1>
+            <p class="slide-subtitle" style="font-size: 20px;">Complete fleet management solution for modern trucking operations</p>
+          </div>
+          
+          <div class="text-center" style="max-width: 1000px; margin: 0 auto;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-bottom: 48px;">
+              <div class="card" style="display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 9999px;">
+                ${icons.truck}
+                <span class="text-sm font-semibold">50+ Trucks Managed</span>
+              </div>
+              <div class="card" style="display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 9999px;">
+                ${icons.radio}
+                <span class="text-sm font-semibold">Real-Time Dispatch</span>
+              </div>
+              <div class="card" style="display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 9999px;">
+                ${icons.map}
+                <span class="text-sm font-semibold">Live GPS Tracking</span>
+              </div>
+              <div class="card" style="display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 9999px;">
+                ${icons.chart}
+                <span class="text-sm font-semibold">Analytics Dashboard</span>
+              </div>
+            </div>
+            
+            <div class="grid-3" style="max-width: 900px; margin: 0 auto 48px;">
+              <div class="card text-center" style="padding: 24px; border-radius: 16px;">
+                <div style="width: 64px; height: 64px; border-radius: 16px; background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                  ${icons.layout}
+                </div>
+                <h3 class="font-semibold mb-2">Super Admin Panel</h3>
+                <p class="text-sm" style="color: var(--muted-foreground);">Complete fleet oversight with CRUD operations for trucks, drivers, loads, and users</p>
+              </div>
+              <div class="card text-center" style="padding: 24px; border-radius: 16px;">
+                <div style="width: 64px; height: 64px; border-radius: 16px; background: rgba(34, 197, 94, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                  <svg class="icon-lg" fill="none" stroke="var(--success)" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2" ry="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                </div>
+                <h3 class="font-semibold mb-2">Mobile Apps</h3>
+                <p class="text-sm" style="color: var(--muted-foreground);">Dedicated apps for Drivers, Dispatchers, and Fleet Managers</p>
+              </div>
+              <div class="card text-center" style="padding: 24px; border-radius: 16px;">
+                <div style="width: 64px; height: 64px; border-radius: 16px; background: rgba(245, 158, 11, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                  <svg class="icon-lg" fill="none" stroke="var(--warning)" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <h3 class="font-semibold mb-2">Live Tracking</h3>
+                <p class="text-sm" style="color: var(--muted-foreground);">Real-time GPS monitoring with status updates and ETA predictions</p>
+              </div>
+            </div>
+            
+            <button class="btn btn-primary" onclick="nextSlide()">
+              Start Presentation
+              <svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+      `;
+      
+      // Slide 2: Process Flow
+      container.innerHTML += `
+        <div class="slide" id="slide-process">
+          <div class="slide-header">
+            <div class="slide-icon">${icons.workflow}</div>
+            <h2 class="slide-title">Dispatch Process Flow</h2>
+            <p class="slide-subtitle">From load creation to delivery confirmation — a seamless workflow</p>
+          </div>
+          
+          <div class="process-flow">
+            <div class="process-step">
+              <div class="process-circle">
+                ${icons.clipboard}
+                <div class="process-number">1</div>
+              </div>
+              <div class="process-title">Load Created</div>
+              <div class="process-desc">Dispatcher creates new load with pickup/delivery details</div>
+            </div>
+            <div class="process-step">
+              <div class="process-circle">
+                ${icons.users}
+                <div class="process-number">2</div>
+              </div>
+              <div class="process-title">Driver Assigned</div>
+              <div class="process-desc">Available driver is assigned to the load</div>
+            </div>
+            <div class="process-step">
+              <div class="process-circle">
+                ${icons.truck}
+                <div class="process-number">3</div>
+              </div>
+              <div class="process-title">Driver Accepts</div>
+              <div class="process-desc">Driver reviews and accepts the assignment</div>
+            </div>
+            <div class="process-step">
+              <div class="process-circle">
+                ${icons.map}
+                <div class="process-number">4</div>
+              </div>
+              <div class="process-title">In Transit</div>
+              <div class="process-desc">Real-time GPS tracking during transport</div>
+            </div>
+            <div class="process-step">
+              <div class="process-circle">
+                ${icons.package}
+                <div class="process-number">5</div>
+              </div>
+              <div class="process-title">Delivery</div>
+              <div class="process-desc">Driver arrives and delivers the load</div>
+            </div>
+            <div class="process-step">
+              <div class="process-circle">
+                ${icons.check}
+                <div class="process-number">6</div>
+              </div>
+              <div class="process-title">Completed</div>
+              <div class="process-desc">POD uploaded and load marked complete</div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Slide 3: Admin Dashboard
+      container.innerHTML += `
+        <div class="slide" id="slide-admin-dashboard">
+          <div class="slide-header">
+            <div class="slide-icon">${icons.layout}</div>
+            <h2 class="slide-title">Admin Dashboard</h2>
+            <p class="slide-subtitle">Complete overview of your fleet operations with real-time metrics</p>
+          </div>
+          
+          <div style="display: flex; gap: 32px; align-items: flex-start; justify-content: center; flex-wrap: wrap;">
+            <div class="desktop-mockup">
+              <div class="desktop-title">Dashboard Overview</div>
+              <div class="desktop-frame">
+                <div class="desktop-topbar">
+                  <div class="desktop-dots">
+                    <div class="desktop-dot red"></div>
+                    <div class="desktop-dot yellow"></div>
+                    <div class="desktop-dot green"></div>
+                  </div>
+                  <div class="desktop-url">truckdispatch.app/admin</div>
+                </div>
+                <div class="desktop-screen p-4">
+                  <div class="card mb-4" style="padding: 12px 16px; border-radius: 8px;">
+                    <span class="font-semibold text-sm">Dashboard</span>
+                  </div>
+                  
+                  <div class="grid-4 mb-4">
+                    <div class="stat-card">
+                      <div class="label"><svg class="icon-sm" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2" ry="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg> Total Trucks</div>
+                      <div class="value">156</div>
+                    </div>
+                    <div class="stat-card">
+                      <div class="label"><svg class="icon-sm" fill="none" stroke="var(--success)" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg> Active Drivers</div>
+                      <div class="value">89</div>
+                    </div>
+                    <div class="stat-card">
+                      <div class="label"><svg class="icon-sm" fill="none" stroke="var(--warning)" stroke-width="2" viewBox="0 0 24 24"><line x1="16.5" x2="7.5" y1="9.4" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg> Active Loads</div>
+                      <div class="value">234</div>
+                    </div>
+                    <div class="stat-card">
+                      <div class="label"><svg class="icon-sm" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><line x1="12" x2="12" y1="2" y2="22"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Revenue (MTD)</div>
+                      <div class="value">$1.2M</div>
+                    </div>
+                  </div>
+                  
+                  <div class="grid-3 mb-4">
+                    <div class="card" style="padding: 12px;">
+                      <div class="flex-between mb-2" style="display: flex; align-items: center; gap: 8px;">
+                        <svg class="icon-sm" fill="none" stroke="var(--success)" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline></svg>
+                        <span class="text-xs">On-Time Delivery</span>
+                      </div>
+                      <div class="font-bold" style="font-size: 20px; color: var(--success);">94.5%</div>
+                    </div>
+                    <div class="card" style="padding: 12px;">
+                      <div class="flex-between mb-2" style="display: flex; align-items: center; gap: 8px;">
+                        <svg class="icon-sm" fill="none" stroke="var(--primary)" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        <span class="text-xs">Avg. Transit Time</span>
+                      </div>
+                      <div class="font-bold" style="font-size: 20px; color: var(--primary);">2.4 days</div>
+                    </div>
+                    <div class="card" style="padding: 12px;">
+                      <div class="flex-between mb-2" style="display: flex; align-items: center; gap: 8px;">
+                        <svg class="icon-sm" fill="none" stroke="var(--warning)" stroke-width="2" viewBox="0 0 24 24"><line x1="16.5" x2="7.5" y1="9.4" y2="4.21"></line><path d="M21 16V8"></path></svg>
+                        <span class="text-xs">Pending Dispatches</span>
+                      </div>
+                      <div class="font-bold" style="font-size: 20px; color: var(--warning);">18</div>
+                    </div>
+                  </div>
+                  
+                  <div class="card" style="padding: 12px;">
+                    <div class="font-semibold text-xs mb-2">Recent Loads</div>
+                    <div style="font-size: 10px;">
+                      <div class="flex-between" style="display: flex; padding: 6px 0; border-bottom: 1px solid var(--border);">
+                        <span class="font-semibold">LD-2024-001</span>
+                        <span style="color: var(--muted-foreground);">Los Angeles, CA</span>
+                        <span style="color: var(--muted-foreground);">Phoenix, AZ</span>
+                        <span class="badge badge-primary">In-Transit</span>
+                      </div>
+                      <div class="flex-between" style="display: flex; padding: 6px 0; border-bottom: 1px solid var(--border);">
+                        <span class="font-semibold">LD-2024-002</span>
+                        <span style="color: var(--muted-foreground);">Dallas, TX</span>
+                        <span style="color: var(--muted-foreground);">Houston, TX</span>
+                        <span class="badge badge-success">Delivered</span>
+                      </div>
+                      <div class="flex-between" style="display: flex; padding: 6px 0;">
+                        <span class="font-semibold">LD-2024-003</span>
+                        <span style="color: var(--muted-foreground);">Chicago, IL</span>
+                        <span style="color: var(--muted-foreground);">Detroit, MI</span>
+                        <span class="badge badge-warning">Pending</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="desktop-stand"></div>
+              <div class="desktop-base"></div>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 16px; max-width: 300px;">
+              <div class="feature-card">
+                <div class="feature-icon">${icons.trending}</div>
+                <div>
+                  <div class="feature-title">Real-Time Metrics</div>
+                  <div class="feature-desc">Monitor fleet performance with live KPIs and trend analysis</div>
+                </div>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">${icons.package}</div>
+                <div>
+                  <div class="feature-title">Load Tracking</div>
+                  <div class="feature-desc">Track all active loads with status updates and ETAs</div>
+                </div>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">${icons.dollar}</div>
+                <div>
+                  <div class="feature-title">Revenue Analytics</div>
+                  <div class="feature-desc">View revenue trends and financial performance</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Slide 4: Admin Management
+      container.innerHTML += `
+        <div class="slide" id="slide-admin-management">
+          <div class="slide-header">
+            <div class="slide-icon">${icons.settings}</div>
+            <h2 class="slide-title">Fleet Management</h2>
+            <p class="slide-subtitle">Complete CRUD operations for Trucks, Drivers, Loads, and Users</p>
+          </div>
+          
+          <div class="grid-2" style="max-width: 1200px; margin: 0 auto;">
+            <div class="card" style="padding: 16px;">
+              <div class="flex-between mb-4" style="display: flex; align-items: center; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  ${icons.truck}
+                  <span class="font-semibold">Trucks Management</span>
+                </div>
+              </div>
+              <div class="flex-between mb-2" style="display: flex; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 4px; background: var(--muted); border-radius: 6px; padding: 4px 8px; font-size: 10px;">
+                  ${icons.search} Search...
+                </div>
+                <button style="display: flex; align-items: center; gap: 4px; background: var(--primary); color: white; border: none; border-radius: 6px; padding: 4px 8px; font-size: 10px; cursor: pointer;">
+                  ${icons.plus} Add New
+                </button>
+              </div>
+              <div style="font-size: 10px;">
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr) 60px; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border); color: var(--muted-foreground);">
+                  <span>Truck #</span><span>Make</span><span>Model</span><span>Year</span><span>Status</span><span>Actions</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr) 60px; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border);">
+                  <span>TRK-001</span><span>Freightliner</span><span>Cascadia</span><span>2022</span><span class="badge badge-success">Active</span>
+                  <span style="display: flex; gap: 4px;">${icons.edit} ${icons.trash}</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr) 60px; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border);">
+                  <span>TRK-002</span><span>Peterbilt</span><span>579</span><span>2021</span><span class="badge badge-success">Active</span>
+                  <span style="display: flex; gap: 4px;">${icons.edit} ${icons.trash}</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr) 60px; gap: 8px; padding: 8px 0;">
+                  <span>TRK-003</span><span>Kenworth</span><span>T680</span><span>2023</span><span class="badge badge-warning">Maintenance</span>
+                  <span style="display: flex; gap: 4px;">${icons.edit} ${icons.trash}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card" style="padding: 16px;">
+              <div class="flex-between mb-4" style="display: flex; align-items: center; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  ${icons.users}
+                  <span class="font-semibold">Drivers Management</span>
+                </div>
+              </div>
+              <div class="flex-between mb-2" style="display: flex; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 4px; background: var(--muted); border-radius: 6px; padding: 4px 8px; font-size: 10px;">
+                  ${icons.search} Search...
+                </div>
+                <button style="display: flex; align-items: center; gap: 4px; background: var(--primary); color: white; border: none; border-radius: 6px; padding: 4px 8px; font-size: 10px; cursor: pointer;">
+                  ${icons.plus} Add New
+                </button>
+              </div>
+              <div style="font-size: 10px;">
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr) 60px; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border); color: var(--muted-foreground);">
+                  <span>Name</span><span>License</span><span>Phone</span><span>Status</span><span>Actions</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr) 60px; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border);">
+                  <span>John Smith</span><span>CDL-A</span><span>(555) 123-4567</span><span class="badge badge-success">Active</span>
+                  <span style="display: flex; gap: 4px;">${icons.edit} ${icons.trash}</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr) 60px; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border);">
+                  <span>Sarah Johnson</span><span>CDL-A</span><span>(555) 234-5678</span><span class="badge badge-primary">On Route</span>
+                  <span style="display: flex; gap: 4px;">${icons.edit} ${icons.trash}</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr) 60px; gap: 8px; padding: 8px 0;">
+                  <span>Mike Davis</span><span>CDL-B</span><span>(555) 345-6789</span><span class="badge badge-warning">Off Duty</span>
+                  <span style="display: flex; gap: 4px;">${icons.edit} ${icons.trash}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card" style="padding: 16px;">
+              <div class="flex-between mb-4" style="display: flex; align-items: center; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  ${icons.package}
+                  <span class="font-semibold">Loads Management</span>
+                </div>
+              </div>
+              <div class="flex-between mb-2" style="display: flex; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 4px; background: var(--muted); border-radius: 6px; padding: 4px 8px; font-size: 10px;">
+                  ${icons.search} Search...
+                </div>
+                <button style="display: flex; align-items: center; gap: 4px; background: var(--primary); color: white; border: none; border-radius: 6px; padding: 4px 8px; font-size: 10px; cursor: pointer;">
+                  ${icons.plus} Add New
+                </button>
+              </div>
+              <div style="font-size: 10px;">
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr) 60px; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border); color: var(--muted-foreground);">
+                  <span>Load #</span><span>Origin</span><span>Destination</span><span>Status</span><span>Actions</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr) 60px; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border);">
+                  <span>LD-2024-001</span><span>Los Angeles, CA</span><span>Phoenix, AZ</span><span class="badge badge-primary">In-Transit</span>
+                  <span style="display: flex; gap: 4px;">${icons.edit} ${icons.trash}</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr) 60px; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border);">
+                  <span>LD-2024-002</span><span>Dallas, TX</span><span>Houston, TX</span><span class="badge badge-success">Delivered</span>
+                  <span style="display: flex; gap: 4px;">${icons.edit} ${icons.trash}</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr) 60px; gap: 8px; padding: 8px 0;">
+                  <span>LD-2024-003</span><span>Chicago, IL</span><span>Detroit, MI</span><span class="badge badge-warning">Pending</span>
+                  <span style="display: flex; gap: 4px;">${icons.edit} ${icons.trash}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card" style="padding: 16px;">
+              <div class="flex-between mb-4" style="display: flex; align-items: center; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  ${icons.users}
+                  <span class="font-semibold">Users Management</span>
+                </div>
+              </div>
+              <div class="flex-between mb-2" style="display: flex; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 4px; background: var(--muted); border-radius: 6px; padding: 4px 8px; font-size: 10px;">
+                  ${icons.search} Search...
+                </div>
+                <button style="display: flex; align-items: center; gap: 4px; background: var(--primary); color: white; border: none; border-radius: 6px; padding: 4px 8px; font-size: 10px; cursor: pointer;">
+                  ${icons.plus} Add New
+                </button>
+              </div>
+              <div style="font-size: 10px;">
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr) 60px; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border); color: var(--muted-foreground);">
+                  <span>Name</span><span>Email</span><span>Role</span><span>Status</span><span>Actions</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr) 60px; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border);">
+                  <span>Admin User</span><span>admin@fleet.com</span><span>Super Admin</span><span class="badge badge-success">Active</span>
+                  <span style="display: flex; gap: 4px;">${icons.edit} ${icons.trash}</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr) 60px; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border);">
+                  <span>Dispatcher 1</span><span>dispatch@fleet.com</span><span>Dispatcher</span><span class="badge badge-success">Active</span>
+                  <span style="display: flex; gap: 4px;">${icons.edit} ${icons.trash}</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr) 60px; gap: 8px; padding: 8px 0;">
+                  <span>Manager</span><span>manager@fleet.com</span><span>Fleet Manager</span><span class="badge badge-success">Active</span>
+                  <span style="display: flex; gap: 4px;">${icons.edit} ${icons.trash}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Slide 5: Driver App
+      container.innerHTML += `
+        <div class="slide" id="slide-driver-app">
+          <div class="slide-header">
+            <div class="slide-icon">${icons.truck}</div>
+            <h2 class="slide-title">Driver Mobile App</h2>
+            <p class="slide-subtitle">Empowering drivers with real-time load management and navigation</p>
+          </div>
+          
+          <div style="display: flex; gap: 32px; align-items: flex-start; justify-content: center; flex-wrap: wrap;">
+            <div style="display: flex; gap: 24px;">
+              <div class="phone-mockup">
+                <div class="phone-title">Home Screen</div>
+                <div class="phone-frame">
+                  <div class="phone-notch"></div>
+                  <div class="phone-screen">
+                    <div class="mobile-header">
+                      <div><h3>Driver Portal</h3><p>John Smith</p></div>
+                      <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--sidebar-accent); display: flex; align-items: center; justify-content: center;">🔔</div>
+                    </div>
+                    <div class="p-4">
+                      <div class="card mb-4" style="background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.3); padding: 16px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                          <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--success); display: flex; align-items: center; justify-content: center;">
+                              <svg class="icon-sm" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                            </div>
+                            <div><p class="font-semibold text-sm">On Duty</p><p class="text-xs" style="color: var(--muted-foreground);">Active since 6:00 AM</p></div>
+                          </div>
+                          <div style="width: 48px; height: 24px; background: var(--success); border-radius: 12px; position: relative;"><div style="position: absolute; right: 4px; top: 4px; width: 16px; height: 16px; background: white; border-radius: 50%;"></div></div>
+                        </div>
+                      </div>
+                      
+                      <div class="card mb-4" style="padding: 16px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                          <span class="text-xs font-semibold">Current Load</span>
+                          <span class="badge badge-primary">In Transit</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                          <svg class="icon-sm" fill="none" stroke="var(--success)" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                          <div><p class="text-xs" style="color: var(--muted-foreground);">Pickup</p><p class="text-xs font-semibold">Los Angeles, CA</p></div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <svg class="icon-sm" fill="none" stroke="var(--destructive)" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                          <div><p class="text-xs" style="color: var(--muted-foreground);">Delivery</p><p class="text-xs font-semibold">Phoenix, AZ</p></div>
+                        </div>
+                      </div>
+                      
+                      <div class="grid-2 mb-4">
+                        <button style="background: var(--primary); color: white; border: none; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer;">
+                          ${icons.navigation}
+                          <span class="text-xs">Navigate</span>
+                        </button>
+                        <button class="card" style="border-radius: 12px; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer;">
+                          ${icons.camera}
+                          <span class="text-xs">Upload POD</span>
+                        </button>
+                      </div>
+                      
+                      <div class="card" style="padding: 16px;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                          ${icons.clock}
+                          <span class="text-xs font-semibold">Hours of Service</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px;">
+                          <span style="color: var(--muted-foreground);">Drive Time</span>
+                          <span class="font-semibold">6h 30m / 11h</span>
+                        </div>
+                        <div class="progress-bar" style="height: 8px;">
+                          <div class="progress-fill" style="width: 59%;"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="phone-mockup">
+                <div class="phone-title">Load Details</div>
+                <div class="phone-frame">
+                  <div class="phone-notch"></div>
+                  <div class="phone-screen">
+                    <div class="mobile-header">
+                      <div><h3>Load Details</h3><p>LD-2024-001</p></div>
+                    </div>
+                    <div class="p-4">
+                      <div style="display: flex; align-items: center; gap: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 12px; padding: 12px; margin-bottom: 16px;">
+                        ${icons.package}
+                        <div><p class="font-semibold text-sm">In Transit</p><p class="text-xs" style="color: var(--muted-foreground);">ETA: 4:30 PM Today</p></div>
+                      </div>
+                      
+                      <div style="margin-bottom: 16px;">
+                        <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                          <div style="display: flex; flex-direction: column; align-items: center;">
+                            <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--success); display: flex; align-items: center; justify-content: center;">
+                              ${icons.check}
+                            </div>
+                            <div style="width: 2px; height: 32px; background: var(--success);"></div>
+                          </div>
+                          <div><p class="text-xs font-semibold">Picked Up</p><p class="text-xs" style="color: var(--muted-foreground);">Los Angeles, CA • 8:00 AM</p></div>
+                        </div>
+                        <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                          <div style="display: flex; flex-direction: column; align-items: center;">
+                            <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center;">
+                              <svg class="icon-sm" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+                            </div>
+                            <div style="width: 2px; height: 32px; background: var(--muted);"></div>
+                          </div>
+                          <div><p class="text-xs font-semibold">In Transit</p><p class="text-xs" style="color: var(--muted-foreground);">280 miles remaining</p></div>
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                          <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--muted); display: flex; align-items: center; justify-content: center;">
+                            ${icons.map}
+                          </div>
+                          <div><p class="text-xs" style="color: var(--muted-foreground);">Delivery</p><p class="text-xs" style="color: var(--muted-foreground);">Phoenix, AZ • Est. 4:30 PM</p></div>
+                        </div>
+                      </div>
+                      
+                      <div class="card" style="padding: 16px;">
+                        <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 12px;">
+                          <span style="color: var(--muted-foreground);">Weight</span>
+                          <span class="font-semibold">42,000 lbs</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 12px;">
+                          <span style="color: var(--muted-foreground);">Distance</span>
+                          <span class="font-semibold">372 miles</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 12px;">
+                          <span style="color: var(--muted-foreground);">Rate</span>
+                          <span class="font-semibold">$2,450</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 16px; max-width: 300px;">
+              <div class="feature-card">
+                <div class="feature-icon">${icons.navigation}</div>
+                <div>
+                  <div class="feature-title">Turn-by-Turn Navigation</div>
+                  <div class="feature-desc">Integrated GPS navigation to pickup and delivery locations</div>
+                </div>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">${icons.camera}</div>
+                <div>
+                  <div class="feature-title">POD Upload</div>
+                  <div class="feature-desc">Capture and upload proof of delivery photos instantly</div>
+                </div>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">${icons.clock}</div>
+                <div>
+                  <div class="feature-title">HOS Tracking</div>
+                  <div class="feature-desc">Monitor hours of service compliance in real-time</div>
+                </div>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">${icons.phone}</div>
+                <div>
+                  <div class="feature-title">Quick Communication</div>
+                  <div class="feature-desc">One-tap call to dispatcher or customer</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Slide 6: Dispatcher App
+      container.innerHTML += `
+        <div class="slide" id="slide-dispatcher-app">
+          <div class="slide-header">
+            <div class="slide-icon">${icons.radio}</div>
+            <h2 class="slide-title">Dispatcher Mobile App</h2>
+            <p class="slide-subtitle">Manage loads and track drivers on-the-go with real-time visibility</p>
+          </div>
+          
+          <div style="display: flex; gap: 32px; align-items: flex-start; justify-content: center; flex-wrap: wrap;">
+            <div style="display: flex; gap: 24px;">
+              <div class="phone-mockup">
+                <div class="phone-title">Dashboard</div>
+                <div class="phone-frame">
+                  <div class="phone-notch"></div>
+                  <div class="phone-screen">
+                    <div class="mobile-header">
+                      <div><h3>Dispatcher Portal</h3><p>Operations Team</p></div>
+                      <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--destructive); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold;">3</div>
+                    </div>
+                    <div class="p-4">
+                      <div style="display: flex; align-items: center; gap: 8px; background: var(--muted); border-radius: 12px; padding: 8px 12px; margin-bottom: 16px;">
+                        ${icons.search}
+                        <span class="text-xs" style="color: var(--muted-foreground);">Search loads, drivers...</span>
+                      </div>
+                      
+                      <div class="grid-3 mb-4" style="gap: 8px;">
+                        <div class="card text-center" style="padding: 8px;">
+                          <p style="font-size: 18px; font-weight: bold; color: var(--primary);">12</p>
+                          <p class="text-xs" style="color: var(--muted-foreground);">Active</p>
+                        </div>
+                        <div class="card text-center" style="padding: 8px;">
+                          <p style="font-size: 18px; font-weight: bold; color: var(--warning);">5</p>
+                          <p class="text-xs" style="color: var(--muted-foreground);">Pending</p>
+                        </div>
+                        <div class="card text-center" style="padding: 8px;">
+                          <p style="font-size: 18px; font-weight: bold; color: var(--success);">8</p>
+                          <p class="text-xs" style="color: var(--muted-foreground);">Available</p>
+                        </div>
+                      </div>
+                      
+                      <div class="grid-2 mb-4" style="gap: 8px;">
+                        <button style="background: var(--primary); color: white; border: none; border-radius: 8px; padding: 8px; font-size: 12px; font-weight: 500;">Loads</button>
+                        <button style="background: var(--muted); color: var(--muted-foreground); border: none; border-radius: 8px; padding: 8px; font-size: 12px; font-weight: 500;">Drivers</button>
+                      </div>
+                      
+                      <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <div class="card" style="padding: 12px;">
+                          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span class="text-xs font-semibold">LD-001</span>
+                            <span class="badge badge-primary">In Transit</span>
+                          </div>
+                          <div style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--muted-foreground); margin-bottom: 8px;">
+                            ${icons.map} LA, CA → Phoenix, AZ
+                          </div>
+                          <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="text-xs">John S.</span>
+                            <div style="display: flex; gap: 4px;">
+                              <button class="card" style="padding: 6px; border-radius: 8px;">${icons.phone}</button>
+                              <button style="background: var(--primary); color: white; border: none; padding: 6px; border-radius: 8px;">${icons.navigation}</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card" style="padding: 12px;">
+                          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span class="text-xs font-semibold">LD-002</span>
+                            <span class="badge badge-warning">Pending</span>
+                          </div>
+                          <div style="display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--muted-foreground); margin-bottom: 8px;">
+                            ${icons.map} Dallas, TX → Houston, TX
+                          </div>
+                          <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="text-xs">Unassigned</span>
+                            <button style="background: var(--primary); color: white; border: none; padding: 6px 12px; border-radius: 8px; font-size: 10px;">Assign</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="phone-mockup">
+                <div class="phone-title">Live Map</div>
+                <div class="phone-frame">
+                  <div class="phone-notch"></div>
+                  <div class="phone-screen">
+                    <div class="mobile-header">
+                      <div><h3>Live Fleet Map</h3><p>12 drivers active</p></div>
+                    </div>
+                    <div style="height: 256px; background: linear-gradient(180deg, rgba(59, 130, 246, 0.05), rgba(59, 130, 246, 0.1)); position: relative;">
+                      <div style="position: absolute; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 40px 40px;"></div>
+                      <div style="position: absolute; left: 20%; top: 30%; width: 24px; height: 24px; border-radius: 50%; background: var(--success); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                        <svg style="width: 12px; height: 12px;" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+                      </div>
+                      <div style="position: absolute; left: 45%; top: 50%; width: 24px; height: 24px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                        <svg style="width: 12px; height: 12px;" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+                      </div>
+                      <div style="position: absolute; left: 70%; top: 25%; width: 24px; height: 24px; border-radius: 50%; background: var(--success); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                        <svg style="width: 12px; height: 12px;" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+                      </div>
+                      <div style="position: absolute; left: 30%; top: 70%; width: 24px; height: 24px; border-radius: 50%; background: var(--warning); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+                        <svg style="width: 12px; height: 12px;" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+                      </div>
+                    </div>
+                    <div class="p-4">
+                      <h4 class="text-xs font-semibold mb-2">Active Drivers</h4>
+                      <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div class="card" style="padding: 8px; display: flex; align-items: center; justify-content: space-between;">
+                          <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--success);"></div>
+                            <div><p class="text-xs font-semibold">John Smith</p><p style="font-size: 10px; color: var(--muted-foreground);">LD-001</p></div>
+                          </div>
+                          <span class="text-xs" style="color: var(--primary); font-weight: 500;">2h 15m</span>
+                        </div>
+                        <div class="card" style="padding: 8px; display: flex; align-items: center; justify-content: space-between;">
+                          <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--warning);"></div>
+                            <div><p class="text-xs font-semibold">Sarah Johnson</p><p style="font-size: 10px; color: var(--muted-foreground);">LD-004</p></div>
+                          </div>
+                          <span class="text-xs" style="color: var(--primary); font-weight: 500;">Loading</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 16px; max-width: 300px;">
+              <div class="feature-card">
+                <div class="feature-icon">${icons.map}</div>
+                <div>
+                  <div class="feature-title">Live GPS Tracking</div>
+                  <div class="feature-desc">Monitor all driver locations in real-time on interactive map</div>
+                </div>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">${icons.package}</div>
+                <div>
+                  <div class="feature-title">Load Management</div>
+                  <div class="feature-desc">Create, assign, and track loads from anywhere</div>
+                </div>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">${icons.users}</div>
+                <div>
+                  <div class="feature-title">Driver Assignment</div>
+                  <div class="feature-desc">Quickly assign available drivers to pending loads</div>
+                </div>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">${icons.phone}</div>
+                <div>
+                  <div class="feature-title">Instant Communication</div>
+                  <div class="feature-desc">Call or message drivers directly from the app</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Slide 7: Manager App
+      container.innerHTML += `
+        <div class="slide" id="slide-manager-app">
+          <div class="slide-header">
+            <div class="slide-icon">${icons.chart}</div>
+            <h2 class="slide-title">Fleet Manager Mobile App</h2>
+            <p class="slide-subtitle">Executive-level insights and fleet performance monitoring</p>
+          </div>
+          
+          <div style="display: flex; gap: 32px; align-items: flex-start; justify-content: center; flex-wrap: wrap;">
+            <div style="display: flex; gap: 24px;">
+              <div class="phone-mockup">
+                <div class="phone-title">Dashboard</div>
+                <div class="phone-frame">
+                  <div class="phone-notch"></div>
+                  <div class="phone-screen">
+                    <div class="mobile-header">
+                      <div><h3>Fleet Manager</h3><p>Executive Overview</p></div>
+                      <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--warning); display: flex; align-items: center; justify-content: center;">
+                        ${icons.alert}
+                      </div>
+                    </div>
+                    <div class="p-4">
+                      <div class="grid-2 mb-4" style="gap: 8px;">
+                        <div class="card" style="padding: 12px;">
+                          <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 4px; font-size: 10px; color: var(--muted-foreground);">
+                            ${icons.dollar} Revenue
+                          </div>
+                          <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                            <span style="font-size: 18px; font-weight: bold;">$1.2M</span>
+                            <span style="font-size: 10px; color: var(--success);">+18%</span>
+                          </div>
+                        </div>
+                        <div class="card" style="padding: 12px;">
+                          <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 4px; font-size: 10px; color: var(--muted-foreground);">
+                            ${icons.trending} On-Time
+                          </div>
+                          <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                            <span style="font-size: 18px; font-weight: bold;">94.5%</span>
+                            <span style="font-size: 10px; color: var(--success);">+2.3%</span>
+                          </div>
+                        </div>
+                        <div class="card" style="padding: 12px;">
+                          <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 4px; font-size: 10px; color: var(--muted-foreground);">
+                            ${icons.truck} Fleet Util.
+                          </div>
+                          <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                            <span style="font-size: 18px; font-weight: bold;">87%</span>
+                            <span style="font-size: 10px; color: var(--destructive);">-1%</span>
+                          </div>
+                        </div>
+                        <div class="card" style="padding: 12px;">
+                          <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 4px; font-size: 10px; color: var(--muted-foreground);">
+                            ${icons.package} Loads/Day
+                          </div>
+                          <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                            <span style="font-size: 18px; font-weight: bold;">45</span>
+                            <span style="font-size: 10px; color: var(--success);">+5</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="card mb-4" style="padding: 12px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+                          <span class="text-xs font-semibold">Revenue Trend</span>
+                          <span style="font-size: 10px; color: var(--muted-foreground);">Last 7 days</span>
+                        </div>
+                        <div style="display: flex; align-items: flex-end; gap: 4px; height: 80px;">
+                          ${[40, 55, 45, 60, 52, 70, 65].map(h => `<div style="flex: 1; background: var(--primary); border-radius: 4px 4px 0 0; height: ${h}%;"></div>`).join('')}
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 8px; font-size: 8px; color: var(--muted-foreground);">
+                          ${['M', 'T', 'W', 'T', 'F', 'S', 'S'].map(d => `<span>${d}</span>`).join('')}
+                        </div>
+                      </div>
+                      
+                      <div class="card" style="padding: 12px;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                          ${icons.truck}
+                          <span class="text-xs font-semibold">Fleet Health</span>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                            <span style="font-size: 10px; color: var(--muted-foreground); width: 80px;">Active</span>
+                            <div class="progress-bar" style="flex: 1; height: 8px;"><div class="progress-fill success" style="width: 90%;"></div></div>
+                            <span style="font-size: 10px; font-weight: 500;">45</span>
+                          </div>
+                          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                            <span style="font-size: 10px; color: var(--muted-foreground); width: 80px;">Maintenance</span>
+                            <div class="progress-bar" style="flex: 1; height: 8px;"><div class="progress-fill warning" style="width: 6%;"></div></div>
+                            <span style="font-size: 10px; font-weight: 500;">3</span>
+                          </div>
+                          <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 10px; color: var(--muted-foreground); width: 80px;">Inactive</span>
+                            <div class="progress-bar" style="flex: 1; height: 8px;"><div class="progress-fill destructive" style="width: 4%;"></div></div>
+                            <span style="font-size: 10px; font-weight: 500;">2</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="phone-mockup">
+                <div class="phone-title">Reports</div>
+                <div class="phone-frame">
+                  <div class="phone-notch"></div>
+                  <div class="phone-screen">
+                    <div class="mobile-header">
+                      <div><h3>Reports & Analytics</h3><p>Performance Insights</p></div>
+                    </div>
+                    <div class="p-4" style="display: flex; flex-direction: column; gap: 16px;">
+                      ${[
+                        { title: 'Driver Performance', value: 'Avg. 4.8/5', trend: '↑ 0.2', icon: icons.users },
+                        { title: 'Fuel Efficiency', value: '7.2 mpg', trend: '↑ 0.3', icon: icons.fuel },
+                        { title: 'Cost per Mile', value: '$1.85', trend: '↓ $0.05', icon: icons.dollar },
+                        { title: 'Avg. Load Time', value: '2.4 days', trend: '↓ 0.2', icon: icons.clock }
+                      ].map(report => `
+                        <div class="card" style="padding: 16px; display: flex; align-items: center; justify-content: space-between;">
+                          <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 40px; height: 40px; border-radius: 8px; background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: center;">
+                              ${report.icon}
+                            </div>
+                            <div>
+                              <p class="text-xs font-semibold">${report.title}</p>
+                              <p style="font-size: 18px; font-weight: bold;">${report.value}</p>
+                            </div>
+                          </div>
+                          <span style="font-size: 12px; color: var(--success); font-weight: 500;">${report.trend}</span>
+                        </div>
+                      `).join('')}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 16px; max-width: 300px;">
+              <div class="feature-card">
+                <div class="feature-icon">${icons.chart}</div>
+                <div>
+                  <div class="feature-title">Real-Time KPIs</div>
+                  <div class="feature-desc">Monitor key performance indicators at a glance</div>
+                </div>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">${icons.dollar}</div>
+                <div>
+                  <div class="feature-title">Revenue Analytics</div>
+                  <div class="feature-desc">Track revenue trends and financial performance</div>
+                </div>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">${icons.truck}</div>
+                <div>
+                  <div class="feature-title">Fleet Health</div>
+                  <div class="feature-desc">Monitor vehicle status and maintenance needs</div>
+                </div>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">${icons.alert}</div>
+                <div>
+                  <div class="feature-title">Smart Alerts</div>
+                  <div class="feature-desc">Proactive notifications for issues requiring attention</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Slide 8: GPS Tracking
+      container.innerHTML += `
+        <div class="slide" id="slide-gps-tracking">
+          <div class="slide-header">
+            <div class="slide-icon">${icons.map}</div>
+            <h2 class="slide-title">Live GPS Tracking</h2>
+            <p class="slide-subtitle">Real-time visibility into your entire fleet with interactive mapping</p>
+          </div>
+          
+          <div style="display: flex; flex-direction: column; gap: 32px; align-items: center;">
+            <div class="map-container">
+              <div class="map-grid"></div>
+              
+              <svg style="position: absolute; inset: 0; width: 100%; height: 100%;">
+                <path d="M 100 200 Q 200 100 350 150 T 600 120" stroke="var(--primary)" stroke-width="3" fill="none" stroke-dasharray="8 4" opacity="0.6" />
+                <path d="M 200 280 Q 300 200 450 220 T 700 180" stroke="var(--success)" stroke-width="3" fill="none" stroke-dasharray="8 4" opacity="0.6" />
+              </svg>
+              
+              <div class="map-marker moving" style="left: 15%; top: 60%;">
+                <svg style="width: 20px; height: 20px;" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+              </div>
+              <div class="map-marker moving" style="left: 35%; top: 40%;">
+                <svg style="width: 20px; height: 20px;" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+              </div>
+              <div class="map-marker stopped" style="left: 55%; top: 55%;">
+                <svg style="width: 20px; height: 20px;" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+              </div>
+              <div class="map-marker moving" style="left: 75%; top: 35%;">
+                <svg style="width: 20px; height: 20px;" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+              </div>
+              <div class="map-marker idle" style="left: 25%; top: 75%;">
+                <svg style="width: 20px; height: 20px;" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+              </div>
+              <div class="map-marker moving" style="left: 85%; top: 65%;">
+                <svg style="width: 20px; height: 20px;" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon></svg>
+              </div>
+              
+              <div class="map-legend">
+                <div class="map-legend-title">Status</div>
+                <div class="map-legend-item"><div class="map-legend-dot" style="background: var(--success);"></div> Moving</div>
+                <div class="map-legend-item"><div class="map-legend-dot" style="background: var(--warning);"></div> Stopped</div>
+                <div class="map-legend-item"><div class="map-legend-dot" style="background: var(--muted);"></div> Idle</div>
+              </div>
+              
+              <div class="map-count">
+                <div class="value">6</div>
+                <div class="label">Active Drivers</div>
+              </div>
+            </div>
+            
+            <div class="grid-4" style="max-width: 800px; width: 100%;">
+              <div class="feature-card" style="flex-direction: column; text-align: center; padding: 20px;">
+                <div class="feature-icon" style="margin: 0 auto 12px;">${icons.map}</div>
+                <div class="feature-title">Real-Time Location</div>
+                <div class="feature-desc">Track driver positions updated every 30 seconds</div>
+              </div>
+              <div class="feature-card" style="flex-direction: column; text-align: center; padding: 20px;">
+                <div class="feature-icon" style="margin: 0 auto 12px;">${icons.route}</div>
+                <div class="feature-title">Route Visualization</div>
+                <div class="feature-desc">View planned routes and actual paths taken</div>
+              </div>
+              <div class="feature-card" style="flex-direction: column; text-align: center; padding: 20px;">
+                <div class="feature-icon" style="margin: 0 auto 12px;">${icons.clock}</div>
+                <div class="feature-title">ETA Predictions</div>
+                <div class="feature-desc">Accurate arrival time estimates based on traffic</div>
+              </div>
+              <div class="feature-card" style="flex-direction: column; text-align: center; padding: 20px;">
+                <div class="feature-icon" style="margin: 0 auto 12px;">${icons.radio}</div>
+                <div class="feature-title">Geofence Alerts</div>
+                <div class="feature-desc">Automatic notifications at key locations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    
+    // Generate navigation tabs
+    function generateNavTabs() {
+      const navTabs = document.getElementById('navTabs');
+      slides.forEach((slide, index) => {
+        const tab = document.createElement('button');
+        tab.className = `nav-tab ${index === 0 ? 'active' : ''}`;
+        tab.innerHTML = `${icons[slide.icon]} <span>${slide.label}</span>`;
+        tab.onclick = () => goToSlide(index);
+        navTabs.appendChild(tab);
+      });
+    }
+    
+    // Generate progress dots
+    function generateProgressDots() {
+      const dotsContainer = document.getElementById('progressDots');
+      slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = `progress-dot ${index === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(index);
+        dotsContainer.appendChild(dot);
+      });
+    }
+    
+    // Update UI
+    function updateUI() {
+      // Update slide counter
+      document.getElementById('currentSlide').textContent = currentSlide + 1;
+      document.getElementById('totalSlides').textContent = slides.length;
+      
+      // Update slides
+      document.querySelectorAll('.slide').forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+      
+      // Update nav tabs
+      document.querySelectorAll('.nav-tab').forEach((tab, index) => {
+        tab.classList.toggle('active', index === currentSlide);
+      });
+      
+      // Update progress dots
+      document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+      
+      // Update nav buttons
+      document.getElementById('prevBtn').disabled = currentSlide === 0;
+      document.getElementById('nextBtn').disabled = currentSlide === slides.length - 1;
+    }
+    
+    // Navigation functions
+    function goToSlide(index) {
+      currentSlide = index;
+      updateUI();
+    }
+    
+    function nextSlide() {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateUI();
+      }
+    }
+    
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateUI();
+      }
+    }
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      }
+    });
+    
+    // Initialize
+    generateSlides();
+    generateNavTabs();
+    generateProgressDots();
+    updateUI();
+  </script>
+</body>
+</html>
